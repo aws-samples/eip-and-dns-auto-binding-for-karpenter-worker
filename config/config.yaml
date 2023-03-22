@@ -1,0 +1,10 @@
+route53:
+  host_zone_id: "Z1XH6UGAQ2GDGX"
+  suffix: "zhenyu-swa.info"
+lambda:
+  ec2_tag: 
+    team: "team1"
+  eip_tag:
+    team: "team1"
+dynamodb:
+  table: "record_set_2"
