@@ -2,7 +2,7 @@
 
 ## Background
 
-Applications that require high bandwidth and low latency, such as live-streaming servers, may require one Pod per Kubernetes/EKS worker. These Pods provide services directly through the host network using an Elastic IP (EIP), rather than going through Ingress or ELB. With this solution, our goal is to automatically assign an EIP and generate a mapped Route53 DNS record for each Karpenter-managed EKS worker. Then, we store the bound information of Pod/worker in a central DynamoDB for scheduling, so as to automate the entire server onboarding process.
+Applications that require high bandwidth and low latency, such as live-streaming server, may require one Pod per Kubernetes/EKS worker. These Pods provide services directly through the host network using an Elastic IP (EIP), rather than going through Ingress or ELB. With this solution, our goal is to automatically assign an EIP and generate a mapped Route53 DNS record for each Karpenter-managed EKS worker. Then, we store the bound information of Pod/worker in a central DynamoDB for scheduling, so as to automate the entire server onboarding process.
 
 ## Solution introduction
 
@@ -18,10 +18,10 @@ Under that, a more secure and decoupled solution is right there
 ##### Data flow
 * If there are any unschduled pods, Karpenter will launch groups of new EKS workers
 * Evenbridge will listen on "Instance state change" notification
-* Once the instance states comes to running, a lambda function will be triggered.
+Once the instance states comes to running, a lambda function will be triggered.
 * Lambda will first get all unassociated EIP with specific tags. Then, assign EIP to the instance
-* Secondly, lambda will create a DNS record based on specific mapping policy
-* Finally, lambda will store EIP, DNS, associate_id and allocation status into Dynamodb, and then schedule server could utilize server information stored in Dynamodb for Live-streaming serving.
+Secondly, lambda will create a DNS record based on specific mapping policy
+* Finally, lambda will store EIP, DNS, associate_id and allocation status into Dynamodb, and then schedule server could utilize server information stored in       Dynamodb for Live-streaming serving.
 
 ## How to deploy
 
